@@ -29,7 +29,10 @@ $.ajax({
         boxCount=response.data.memes[this.value].box_count;
         console.log(boxCount);
         for (let i = 0; i < boxCount; i++) {
-            $(`<label for="textBox${i}">Text Box #${i+1}</label><input type="text" class="memeTextInput" id="textBox${i}"><br>`).appendTo("#textBoxes");
+          $(`<div class="form-group" id="textArea">
+            <label for="textBox${i}">Text Box #${i+1}</label>
+            <input type="text" class="form-control memeTextInput" id="textBox${i}">
+            </div>`).appendTo("#textBoxes");
         }
     });
   
@@ -41,10 +44,10 @@ $("#submitButton").on("click",function(){
 
   function getMeme(){
   
-  // for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
-  //   const textBox = document.querySelectorAll(".memeTextInput")[i].value;
+  for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
+    const textBox = document.querySelectorAll(".memeTextInput")[i].value;
     
-  // }
+  }
   let queryURL="https://api.imgflip.com/caption_image"
   $.ajax({
     url: queryURL,
