@@ -82,18 +82,19 @@ var dataObject={username: "abtobey", password:"41River77$"};
   for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
     let textBox = document.querySelectorAll(".memeTextInput")[i].value;
     boxes.push({"text":textBox})
+    console.log(boxes);
   }
   dataObject.boxes=boxes;
   console.log(dataObject);
   let queryURL="https://api.imgflip.com/caption_image"
-  $.ajax({
-    url: queryURL,
-    method: "POST",
-    data:dataObject
-    }).then(function(response){
-        console.log(response);
-        $("#memeImage").attr("src",response.data.url)
-    })
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "POST",
+  //   data:dataObject
+  //   }).then(function(response){
+  //       console.log(response);
+  //       $("#memeImage").attr("src",response.data.url)
+  //   })
   }
 
   
