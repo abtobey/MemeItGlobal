@@ -1,6 +1,8 @@
 queryURL="https://api.imgflip.com/get_memes";
 var memeSelect=document.getElementById("memeSelect");
+//declare these as global variables because we need them outside the first API call
 var memeObject=""
+var template_id=""
 $.ajax({
     url: queryURL,
     method: "GET"
@@ -19,24 +21,35 @@ $.ajax({
       //creates event listener for dropdown box
       document.getElementById("memeSelect").addEventListener("change",function() {
         console.log(this.value);
+        template_id=response.data.memes[this.value].id;
         $("#memeImage").attr("src",response.data.memes[this.value].url)
         $("#memeImage").attr("alt",response.data.memes[this.value].name)
         //create dropdown boxes
+        document.getElementById("textBoxes").innerHTML="";
         boxCount=response.data.memes[this.value].box_count;
         console.log(boxCount);
         for (let i = 0; i < boxCount; i++) {
-            $(`<label for="textBox${i}">Text Box #${i+1}</label><input type="text" id="textBox${i}"><br>`).appendTo("#textBoxes");
+            $(`<label for="textBox${i}">Text Box #${i+1}</label><input type="text" class="memeTextInput" id="textBox${i}"><br>`).appendTo("#textBoxes");
         }
     });
   
   });
+$("#submitButton").on("click",function(){
+  let postQueryURL="https://api.imgflip.com/caption_image?template_id="+template_id+"";
+  for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
+    postQueryURL += "&text"+i+"="+document.querySelectorAll(".memeTextInput")[i].value+"";
+    
+  }
+  console.log(postQueryURL);
+})
+
   function getMeme(){
   $.ajax({
     url: queryURL,
     method: "POST",
     data:{username: "abtobey", password:"41River77$"}
     }).then(function(response){
-        
+        console.log(response);
     })
   }
 
