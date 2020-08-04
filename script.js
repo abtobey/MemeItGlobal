@@ -35,19 +35,21 @@ $.ajax({
   
   });
 $("#submitButton").on("click",function(){
-  let postQueryURL="https://api.imgflip.com/caption_image?template_id="+template_id+"";
-  for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
-    postQueryURL += "&text"+i+"="+document.querySelectorAll(".memeTextInput")[i].value+"";
-    
-  }
-  console.log(postQueryURL);
+  
+  getMeme();
 })
 
   function getMeme(){
+  
+  // for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
+  //   const textBox = document.querySelectorAll(".memeTextInput")[i].value;
+    
+  // }
+  let queryURL="https://api.imgflip.com/caption_image"
   $.ajax({
     url: queryURL,
     method: "POST",
-    data:{username: "abtobey", password:"41River77$"}
+    data:{username: "abtobey", password:"41River77$", template_id: "87743020", text0:"google frantically", text1:"panic"}
     }).then(function(response){
         console.log(response);
     })
