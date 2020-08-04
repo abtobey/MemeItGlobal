@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $("translateIt").on("click", function(event){
 
 	event.preventDefault();
@@ -33,7 +32,6 @@ $("translateIt").on("click", function(event){
 
 })
 
-=======
 queryURL="https://api.imgflip.com/get_memes";
 var memeSelect=document.getElementById("memeSelect");
 //declare these as global variables because we need them outside the first API call
@@ -77,22 +75,25 @@ $("#submitButton").on("click",function(){
   
   getMeme();
 })
-
+let boxes=[];
+var dataObject={username: "abtobey", password:"41River77$"};
   function getMeme(){
-  
+  dataObject.template_id=template_id;
   for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
-    const textBox = document.querySelectorAll(".memeTextInput")[i].value;
-    
+    let textBox = document.querySelectorAll(".memeTextInput")[i].value;
+    boxes.push({"text":textBox})
   }
+  dataObject.boxes=boxes;
+  console.log(dataObject);
   let queryURL="https://api.imgflip.com/caption_image"
   $.ajax({
     url: queryURL,
     method: "POST",
-    data:{username: "abtobey", password:"41River77$", template_id: "87743020", text0:"google frantically", text1:"panic"}
+    data:dataObject
     }).then(function(response){
         console.log(response);
+        $("#memeImage").attr("src",response.data.url)
     })
   }
 
   
->>>>>>> master
