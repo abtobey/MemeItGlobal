@@ -5,3 +5,25 @@
 #submitButton {
     background-color: mediumpurple;
 }
+
+#jumbotron {
+    text-align: center;
+}
+
+#main-pg {
+    margin: auto 100px;
+    max
+}
+
+/* #memeImage {
+    width: auto;
+} */
+
+h1 {
+    font-family: 'Anton', sans-serif;
+}
+
+h3, p, main {
+    font-family: 'Oswald', sans-serif;
+    
+}
