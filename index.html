@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body class="">
-    
+
+    <!--Header of the Website-->
     <header class="jumbotron jumbotron-fluid container rounded" id="jumbotron">
         <section class="container">
           <h1 class="display-4">Welcome to Meme It!</h1>
@@ -24,25 +25,30 @@
         </section>
     </header>
     
+    <!-- Main Content of the Website -->
     <main class="container">
         <section class="card">
-            <h5 class="card-header" id="cardHeader">Create Your Meme<i class="far fa-newspaper"></i>
-            </h5>
+
+            <h5 class="card-header" id="cardHeader">Create Your Meme<i class="far fa-newspaper"></i></h5>
+            
             <section class="card-body container">
+
+                <!-- Input groups -->
                 <section class="form-group" id="textArea">
                 <label for="memeSelect">Select Meme</label>
                     <select class="form-control" id="memeSelect">
                     </select>
                 </section>
 
-                <div class="form-group" id="textArea">
+                <section class="form-group" id="textArea">
                     <label for="fontSelect">Font</label>
                     <select class="form-control" id="fontSelect">
                         <option>impact</option>
                         <option>arial</option>
                     </select>
-                </div>
-                <div class="form-group" id="textArea">
+                </section>
+
+                <section class="form-group" id="textArea">
                     <label for="languageSelect">Select Language</label>
                     <select class="form-control" id="languageSelect">
                         <option value="en">English</option>
@@ -54,8 +60,9 @@
                         <option value="sv">Swedish</option>
                         <option value="nl">Dutch</option>
                     </select>
-                </div>
-                <div id="textBoxes"></div>
+                </section>
+
+                <section id="textBoxes"></section>
                 
                 <button class="btn" id="submitButton" type="submit">Submit</button>
 
@@ -63,7 +70,7 @@
         </section>
         <br>
         <div class="card-body row">
-            <img src="https://i.kym-cdn.com/entries/icons/facebook/000/000/091/TrollFace.jpg" class="img-fluid center col-12" alt="Responsive image" id="memeImage">
+            <img src="" class="img-fluid center col-12" alt="" id="memeImage">
         </div>
         
 
