@@ -1,16 +1,33 @@
-# Project1
+# Project1: Meme It: Global!
+###Created by: Aaron, Luis, and Nicci
 
-Project title: Meme It: Global!
-Project description: Our app will allow the user to generate a meme and translate it
-User story: As a meme aficionado,
-	            I want to be able to create memes in any language
-	            so that I can participate in the world around me.
-	            Given the tools to customize my meme,
-	            when I run my text through the translator,
-	            then I will have a fully adaptable meme!
-Wireframe: by Luis
-APIs to be used: Google Translate
-		             ImgFlip
-Task breakdown: front-end interface by Luis
-		              Google Translate API interface by Nicci
-		              ImgFlip API interface by Aaron
+## Project description and Usage 
+Our app will allow the user to select a meme and customize it in the language of their choice! 
+First, the top drop down menu will generate the list of the top 100 most popular memes. 
+Then, the user can customize the meme of their choice with their text input. 
+Afterwards, they can select one of seven languages in which to translate their meme. 
+Lastly, they can post the meme to ImgFlip's hosting site!
+
+## User story 
+	As a meme aficionado,
+	I want to be able to create custom memes in any language
+	so that I can meme around the world!
+	Given the tools to customize my meme,
+	when I run my text through the translator,
+	then I will have a fully adaptable meme!
+
+## Installation
+https://atobey.github.io/memeitglobal
+
+## APIs used 
+Google Translate
+ImgFlip
+
+## Authors
+Aaron Tobey
+Luis Sevilla
+Nicci Moyer
+
+## Acknowledgements
+Special thanks to Dane Edwards and Andrew Layendecker!
+
