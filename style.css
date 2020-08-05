@@ -38,9 +38,13 @@ body {
 @media only screen and (max-width: 600px) {
     body {
         background-image: url(https://i.kym-cdn.com/entries/icons/facebook/000/000/091/TrollFace.jpg);
-        /* background-size: cover; */
+        background-size: 95%;
         background-position: center center;
         background-attachment: fixed;
         background-repeat: no-repeat;
+        
+    }
+    #main-pg {
+        margin: auto 20px;
     }
   }
