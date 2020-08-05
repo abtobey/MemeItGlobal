@@ -1,10 +1,10 @@
-textBoxArray = []
-
 queryURL="https://api.imgflip.com/get_memes";
 var memeSelect=document.getElementById("memeSelect");
 //declare these as global variables because we need them outside the first API call
-var memeObject=""
-var template_id=""
+var memeObject="";
+var template_id="";
+let textBoxArray = [];
+//this calls the imgflip API to get a list of the top 100 most popular memes
 $.ajax({
     url: queryURL,
     method: "GET"
@@ -39,35 +39,45 @@ $.ajax({
     });
   
   });
-// $("#submitButton").on("click",function(){
-  
-//   getMeme();
-// })
 
-  // function getMeme(){
-  
-  // for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
-  //   const textBox = document.querySelectorAll(".memeTextInput")[i].value;
-    
-  // }
-  // let queryURL="https://api.imgflip.com/caption_image"
-  // $.ajax({
-  //   url: queryURL,
-  //   method: "POST",
-  //   data:{username: "abtobey", password:"41River77$", template_id: "87743020", text0:"google frantically", text1:"panic"}
-  //   }).then(function(response){
-  //       console.log(response);
-  //   })
-  // }
+//this gets the final meme image from imgflip
+var dataObject={username: "abtobey", password:"41River77$"};
+  function getMeme(){
+  dataObject.template_id=template_id;
+  dataObject.boxes=textBoxArray;
+  let queryURL="https://api.imgflip.com/caption_image"
+
+  //imgflip POST request
+  $.ajax({
+    url: queryURL,
+    method: "POST",
+    data:dataObject
+    }).then(function(response){
+        console.log(response);
+        $("#memeImage").attr("src",response.data.url)
+    })
+  }
+
 
   
-  
+  //google translate
   $("#submitButton").on("click", function(event){
-
-   textBoxArray = []
+    let languageAbbr=document.getElementById("languageSelect").value;
+    //requestsReturned counts the number of translate API requests that have been returned. This is to prevent the POST request from running until ALL lines have been translated
+    let requestsReturned=0;
+    textBoxArray = [];
    
     event.preventDefault();
-
+    //if language is english, no translation required, so don't waste an API call
+    if (languageAbbr==="en"){
+      for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++){
+        const textBox = document.querySelectorAll(".memeTextInput")[i].value;  
+        textBoxArray.push({"text":textBox})
+      }
+      getMeme();
+    }
+    else{
+      //loops through each line and sends API request to google translate
     for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
       const textBox = document.querySelectorAll(".memeTextInput")[i].value;  
       textBoxArray.push({"text":""})
@@ -79,24 +89,30 @@ $.ajax({
       "method": "POST",
       "headers": {
         "x-rapidapi-host": "google-translate1.p.rapidapi.com",
-        "x-rapidapi-key": "241e327413mshff46d0a3fc5647ep185311jsne86067773ada",
+        "x-rapidapi-key": "2ca2214731msh175d550fc24141bp15c630jsne72e70687c11",
         "accept-encoding": "application/gzip",
         "content-type": "application/x-www-form-urlencoded"
       },
       "data": {
         "source": "en",
         "q": textBox,
-        "target": "es"
+        "target": languageAbbr
       }
     }
 
   
-    $.ajax(settings).done(function (response) {
-         
+    $.ajax(settings).then(function (response) {
       let esText = response.data.translations[0].translatedText
       textBoxArray[i].text = esText
-  
+      requestsReturned++;
+      //once ALL requests have been returned, then call getMeme function to send POST request to imgflip
+      if(requestsReturned==document.querySelectorAll(".memeTextInput").length){
+        getMeme();
+      }
+      
     });
   }
-  console.log(textBoxArray)
+
+  }
+
   })
