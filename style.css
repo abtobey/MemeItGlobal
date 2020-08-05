@@ -10,6 +10,10 @@
     text-align: center;
 }
 
+#cardHeader {
+    background-color: mediumpurple;
+}
+
 #main-pg {
     margin: auto 100px;
 }
