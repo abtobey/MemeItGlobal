@@ -62,12 +62,22 @@ var dataObject={username: "abtobey", password:"41River77$"};
   
   //google translate
   $("#submitButton").on("click", function(event){
+    let languageAbbr=document.getElementById("languageSelect").value;
     //requestsReturned counts the number of translate API requests that have been returned. This is to prevent the POST request from running until ALL lines have been translated
     let requestsReturned=0;
     textBoxArray = [];
    
     event.preventDefault();
-    //loops through each line and sends API request to google translate
+    //if language is english, no translation required, so don't waste an API call
+    if (languageAbbr==="en"){
+      for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++){
+        const textBox = document.querySelectorAll(".memeTextInput")[i].value;  
+        textBoxArray.push({"text":textBox})
+      }
+      getMeme();
+    }
+    else{
+      //loops through each line and sends API request to google translate
     for (let i = 0; i < document.querySelectorAll(".memeTextInput").length; i++) {
       const textBox = document.querySelectorAll(".memeTextInput")[i].value;  
       textBoxArray.push({"text":""})
@@ -86,7 +96,7 @@ var dataObject={username: "abtobey", password:"41River77$"};
       "data": {
         "source": "en",
         "q": textBox,
-        "target": "es"
+        "target": languageAbbr
       }
     }
 
@@ -101,6 +111,7 @@ var dataObject={username: "abtobey", password:"41River77$"};
       }
       
     });
+  }
   }
   
   })
