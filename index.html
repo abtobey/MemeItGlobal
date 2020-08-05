@@ -5,28 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme It!</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
 </head>
-<body class="bg-light">
+<body class="">
     
-    <header class="jumbotron jumbotron-fluid container" id="jumbotron">
-        <div class="container">
+    <header class="jumbotron jumbotron-fluid container rounded" id="jumbotron">
+        <section class="container">
           <h1 class="display-4">Welcome to Meme It!</h1>
-          <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore ipsum fugiat a deleniti hic, facere laboriosam doloremque in repudiandae reiciendis officiis maxime molestiae culpa magnam temporibus ea dicta beatae. Sit.</p>
-        </div>
+          <br>
+          <h3>Hello Meme Aficionado!</h3>
+          <br>
+          <p class="lead" id="main-pg">To get started, select your favorite meme. Then choose a font to go with your meme. You're then free to type whatever you'd like in the input fields.</p>
+          <br>
+          <p class="lead">Easy right? Enjoy!</p>
+          <br>
+        </section>
     </header>
     
     <main class="container">
-        <div class="card">
-            <h5 class="card-header">Create Your Meme<i class="far fa-newspaper"></i>
+        <section class="card">
+            <h5 class="card-header" id="cardHeader">Create Your Meme<i class="far fa-newspaper"></i>
             </h5>
-            <div class="card-body container">
-                <div class="form-group" id="textArea">
+            <section class="card-body container">
+                <section class="form-group" id="textArea">
                 <label for="memeSelect">Select Meme</label>
                     <select class="form-control" id="memeSelect">
                     </select>
-                </div>
+                </section>
 
                 <div class="form-group" id="textArea">
                     <label for="fontSelect">Font</label>
@@ -50,13 +57,13 @@
                 </div>
                 <div id="textBoxes"></div>
                 
-                <button class="btn btn-primary" id="submitButton" type="submit">Submit</button>
+                <button class="btn" id="submitButton" type="submit">Submit</button>
 
-            </div>
-        </div>
+            </section>
+        </section>
         <br>
-        <div class="card-body container">
-            <img src="https://i.kym-cdn.com/entries/icons/facebook/000/000/091/TrollFace.jpg" class="img-fluid center" alt="Responsive image" id="memeImage">
+        <div class="card-body row">
+            <img src="https://i.kym-cdn.com/entries/icons/facebook/000/000/091/TrollFace.jpg" class="img-fluid center col-12" alt="Responsive image" id="memeImage">
         </div>
         
 

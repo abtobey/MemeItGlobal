@@ -5,3 +5,24 @@
 #submitButton {
     background-color: mediumpurple;
 }
+
+#jumbotron {
+    text-align: center;
+}
+
+#cardHeader {
+    background-color: mediumpurple;
+}
+
+#main-pg {
+    margin: auto 100px;
+}
+
+h1 {
+    font-family: 'Anton', sans-serif;
+}
+
+h3, p, main {
+    font-family: 'Oswald', sans-serif;
+    
+}
