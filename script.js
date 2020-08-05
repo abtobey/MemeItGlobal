@@ -8,7 +8,7 @@ if (memeList===null) {
 //wries the memes to the page
 for (let i = 0; i < memeList.length; i++) {
   const imgURL = memeList[i];
-  $(`<img src="${memeList[i]}" class="img-fluid center col-12" alt="Responsive image" id="memeImage">`).prependTo("#imgSlot");
+  $(`<img src="${memeList[i]}" class="img-fluid center col-12" alt="Responsive image" id="memeImage${i}">`).prependTo("#imgSlot");
 }
 //declare these as global variables because we need them outside the first API call
 var memeObject="";
@@ -34,8 +34,8 @@ $.ajax({
       document.getElementById("memeSelect").addEventListener("change",function() {
         console.log(this.value);
         template_id=response.data.memes[this.value].id;
-        $("#memeImage").attr("src",response.data.memes[this.value].url)
-        $("#memeImage").attr("alt",response.data.memes[this.value].name)
+        $("#newMeme").attr("src",response.data.memes[this.value].url)
+        $("#newMeme").attr("alt",response.data.memes[this.value].name)
         //create dropdown boxes
         document.getElementById("textBoxes").innerHTML="";
         boxCount=response.data.memes[this.value].box_count;
