@@ -1,5 +1,15 @@
 queryURL="https://api.imgflip.com/get_memes";
 var memeSelect=document.getElementById("memeSelect");
+//checks if memeList exists in local storage and, if not, opens a new array in which to store them
+let memeList = JSON.parse(localStorage.getItem("memeList"));
+if (memeList===null) {
+ memeList = [];
+}
+//wries the memes to the page
+for (let i = 0; i < memeList.length; i++) {
+  const imgURL = memeList[i];
+  $(`<img src="${memeList[i]}" class="img-fluid center col-12" alt="Responsive image" id="memeImage">`).prependTo("#imgSlot");
+}
 //declare these as global variables because we need them outside the first API call
 var memeObject="";
 var template_id="";
@@ -47,14 +57,16 @@ var dataObject={username: "abtobey", password:"41River77$"};
   dataObject.boxes=textBoxArray;
   let queryURL="https://api.imgflip.com/caption_image"
 
-  //imgflip POST request
+  //imgflip POST request and pre-existing meme posts
   $.ajax({
     url: queryURL,
     method: "POST",
     data:dataObject
     }).then(function(response){
         console.log(response);
-        $("#memeImage").attr("src",response.data.url)
+        $("#memeImage").attr("src",response.data.url);
+        memeList.push(response.data.url);
+        localStorage.setItem("memeList", JSON.stringify(memeList));
     })
   }
 
