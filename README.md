@@ -16,8 +16,11 @@ Lastly, they can post the meme to ImgFlip's hosting site!
 	when I run my text through the translator,
 	then I will have a fully adaptable meme!
 
-## Installation
+## Deployment
 https://atobey.github.io/memeitglobal
+
+## Sample
+https://user-images.githubusercontent.com/68203580/89445947-737dcd00-d719-11ea-98de-5478566dd11e.jpg
 
 ## APIs used 
 Google Translate
@@ -30,4 +33,5 @@ Nicci Moyer
 
 ## Acknowledgements
 Special thanks to Dane Edwards and Andrew Layendecker!
+
 
