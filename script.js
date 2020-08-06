@@ -156,6 +156,7 @@ $("#submitButton").on("click", function (event) {
 
 })
 
+// Light/Dark Feature
 document.addEventListener('DOMContentLoaded', () => {
 
   const themeStylesheet = document.getElementById('theme');
