@@ -1,0 +1,58 @@
+/* IDs */
+#cardHeader {
+    background-color: mediumpurple;
+}
+
+#jumbotron {
+    background-color: mediumpurple;
+}
+
+
+#jumbotron {
+    text-align: center;
+}
+
+
+#main-pg {
+    margin: auto 100px;
+}
+
+#submitButton, #theme-toggle {
+    background-color: mediumpurple;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Fonts */
+h1 {
+    font-family: 'Anton', sans-serif;
+}
+
+h3, p, main, #theme-toggle {
+    font-family: 'Oswald', sans-serif;
+    
+}
+
+/* General */
+body {
+    background-image: url(./assets/TrollFace-background.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+    body {
+        background-image: url(https://i.kym-cdn.com/entries/icons/facebook/000/000/091/TrollFace.jpg);
+        background-size: 95%;
+        background-position: center center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        
+    }
+    #main-pg {
+        margin: auto 20px;
+    }
+  }
