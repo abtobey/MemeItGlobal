@@ -9,12 +9,12 @@ if (memeList === null) {
 for (let i = 0; i < memeList.length; i++) {
   const imgURL = memeList[i];
   $(`<div id="savedImage${i}" class="img-fluid center col-12">
-  <img src="${memeList[i]}" class="img-fluid center col-12" alt="Responsive image" id="memeImage${i}"> <br> 
+  <img src="${memeList[i].url}" class="img-fluid center col-12" alt="Responsive image" id="memeImage${i}"> <br> 
   <div class="input-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text">Image URL</span>
   </div>
-  <input type="text" class="form-control" value="${memeList[i]}">
+  <input type="text" class="form-control" value="${memeList[i].url}">
   <div class="input-group-append">
     <button class="deleteBtn btn btn-outline-secondary" type="button" value="${i}" id="button-addon2">Delete</button>
   </div>
@@ -54,13 +54,19 @@ $.ajax({
   }
   //creates event listener for dropdown box
   document.getElementById("memeSelect").addEventListener("change", function () {
-    console.log(this.value);
-    template_id = response.data.memes[this.value].id;
-    $("#newMeme").attr("src", response.data.memes[this.value].url)
-    $("#newMeme").attr("alt", response.data.memes[this.value].name)
+    loadBlankMeme(this.value);
+  });
+
+});
+
+function loadBlankMeme(memeID){
+  console.log(memeID);
+    template_id = memeObject.data.memes[memeID].id;
+    $("#newMeme").attr("src", memeObject.data.memes[memeID].url)
+    $("#newMeme").attr("alt", memeObject.data.memes[memeID].name)
     //create dropdown boxes
     document.getElementById("textBoxes").innerHTML = "";
-    boxCount = response.data.memes[this.value].box_count;
+    boxCount = memeObject.data.memes[memeID].box_count;
     console.log(boxCount);
     for (let i = 0; i < boxCount; i++) {
       $(`<div class="form-group" id="textBox">
@@ -68,9 +74,7 @@ $.ajax({
             <input type="text" class="form-control memeTextInput" id="textBox${i}">
             </div>`).appendTo("#textBoxes");
     }
-  });
-
-});
+}
 
 //this gets the final meme image from imgflip
 var dataObject = { username: "abtobey", password: "41River77$" };
@@ -90,7 +94,7 @@ function getMeme() {
     }).then(function(response){
         console.log(response);
         $("#newMeme").attr("src",response.data.url);
-        memeList.push(response.data.url);
+        memeList.push({"url":response.data.url, "boxes":textBoxArray, "font":dataObject.font, "template":$("#memeSelect")[0].value});
         localStorage.setItem("memeList", JSON.stringify(memeList));
     })
   }
@@ -167,7 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
           themeStylesheet.href = 'light-theme.css';
           themeToggle.innerText = 'Switch to dark mode';
 
+
       }
   })
 })
- 
+
