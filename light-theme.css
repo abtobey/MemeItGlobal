@@ -23,6 +23,12 @@
     margin: 0 auto;
 }
 
+/* Classes */
+.deleteBtn {
+    background-color: red;
+    color: white;
+}
+
 /* Fonts */
 h1 {
     font-family: 'Anton', sans-serif;

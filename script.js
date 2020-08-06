@@ -152,6 +152,7 @@ $("#submitButton").on("click", function (event) {
 
 })
 
+// Light/Dark Feature
 document.addEventListener('DOMContentLoaded', () => {
 
   const themeStylesheet = document.getElementById('theme');
@@ -169,7 +170,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   })
 })
-// function changeFont() {
-//   let fontSelect = document.getElementById("input-font");   
-//   let font = fontSelect.options[fontSelect.selectedIndex].value;  
-//   document.getElementsByClassName("memeTextInput").style.fontFamily = font;   
+ 

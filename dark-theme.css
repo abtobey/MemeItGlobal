@@ -30,6 +30,10 @@
 .card {
     background-color: #696969;
 } */
+.deleteBtn {
+    background-color: red;
+    color: white;
+}
 
 
 /* Fonts */
