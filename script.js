@@ -9,7 +9,7 @@ if (memeList === null) {
 for (let i = 0; i < memeList.length; i++) {
   const imgURL = memeList[i];
   $(`<div id="savedImage${i}" class="img-fluid center col-12">
-  <img src="${memeList[i].url}" class="img-fluid center col-12" alt="Responsive image" id="memeImage${i}"> <br> 
+  <img src="${memeList[i].url}" class="storedImg img-fluid center col-12" alt="Responsive image" id="${i}"> <br> 
   <div class="input-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text">Image URL</span>
@@ -24,13 +24,25 @@ for (let i = 0; i < memeList.length; i++) {
 }
 //allow users to remove memes from their page
 $(".deleteBtn").on("click", function(){
-  console.log(memeList[this.value]);
+  // console.log(memeList[this.value]);
   document.getElementById("savedImage"+this.value).innerHTML=("");
   //remove element at index i from meme array
   memeList.splice(this.value,1);
   //send updated meme array to local storage
   localStorage.setItem("memeList", JSON.stringify(memeList));
 })
+
+$(".storedImg").on("dblclick", function(){
+  loadMeme=memeList[this.id];
+  $("#memeSelect")[0].value=loadMeme.template;
+  loadBlankMeme(loadMeme.template);
+  $("#fontSelect")[0].value=loadMeme.font;
+  //loops through newly created text boxes and loads in meme text
+  for (let i = 0; i < loadMeme.boxes.length; i++) {
+    const currentBox = loadMeme.boxes[i];
+    $("#textBox"+i)[0].value=currentBox.text;
+  }
+});
 
 //declare these as global variables because we need them outside the first API call
 var memeObject = "";
@@ -41,7 +53,7 @@ $.ajax({
   url: queryURL,
   method: "GET"
 }).then(function (response) {
-  console.log(response);
+  // console.log(response);
   //saves response into global object so it can be referenced outside this function
   memeObject = response;
   //add memes to dropdown menu
@@ -59,15 +71,14 @@ $.ajax({
 
 });
 
+//this loads the correct number of text boxes and load the image
 function loadBlankMeme(memeID){
-  console.log(memeID);
     template_id = memeObject.data.memes[memeID].id;
     $("#newMeme").attr("src", memeObject.data.memes[memeID].url)
     $("#newMeme").attr("alt", memeObject.data.memes[memeID].name)
     //create dropdown boxes
     document.getElementById("textBoxes").innerHTML = "";
     boxCount = memeObject.data.memes[memeID].box_count;
-    console.log(boxCount);
     for (let i = 0; i < boxCount; i++) {
       $(`<div class="form-group" id="textBox">
             <label for="textBox${i}">Text Box #${i + 1}</label>
@@ -92,7 +103,7 @@ function getMeme() {
     method: "POST",
     data:dataObject
     }).then(function(response){
-        console.log(response);
+        // console.log(response);
         $("#newMeme").attr("src",response.data.url);
         memeList.push({"url":response.data.url, "boxes":textBoxArray, "font":dataObject.font, "template":$("#memeSelect")[0].value});
         localStorage.setItem("memeList", JSON.stringify(memeList));
