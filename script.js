@@ -8,8 +8,30 @@ if (memeList===null) {
 //wries the memes to the page
 for (let i = 0; i < memeList.length; i++) {
   const imgURL = memeList[i];
-  $(`<img src="${memeList[i]}" class="img-fluid center col-12" alt="Responsive image" id="memeImage${i}">`).prependTo("#imgSlot");
+  $(`<div id="savedImage${i}" class="img-fluid center col-12">
+  <img src="${memeList[i]}" class="img-fluid center col-12" alt="Responsive image" id="memeImage${i}"> <br> 
+  <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Image URL</span>
+  </div>
+  <input type="text" class="form-control" value="${memeList[i]}">
+  <div class="input-group-append">
+    <button class="deleteBtn btn btn-outline-secondary" type="button" value="${i}" id="button-addon2">Delete</button>
+  </div>
+</div>
+</div>
+`).prependTo("#imgSlot");
 }
+//allow users to remove memes from their page
+$(".deleteBtn").on("click", function(){
+  console.log(memeList[this.value]);
+  document.getElementById("savedImage"+this.value).innerHTML=("");
+  //remove element at index i from meme array
+  memeList.splice(this.value,1);
+  //send updated meme array to local storage
+  localStorage.setItem("memeList", JSON.stringify(memeList));
+})
+
 //declare these as global variables because we need them outside the first API call
 var memeObject="";
 var template_id="";
@@ -64,7 +86,7 @@ var dataObject={username: "abtobey", password:"41River77$"};
     data:dataObject
     }).then(function(response){
         console.log(response);
-        $("#memeImage").attr("src",response.data.url);
+        $("#newMeme").attr("src",response.data.url);
         memeList.push(response.data.url);
         localStorage.setItem("memeList", JSON.stringify(memeList));
     })

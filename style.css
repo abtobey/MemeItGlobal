@@ -26,6 +26,9 @@ h3, p, main {
     font-family: 'Oswald', sans-serif;
     
 }
+.deleteBtn{
+    background-color:red;
+}
 
 body {
     background-image: url(https://i.kym-cdn.com/entries/icons/facebook/000/000/091/TrollFace.jpg);
