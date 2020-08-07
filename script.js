@@ -5,22 +5,48 @@ let memeList = JSON.parse(localStorage.getItem("memeList"));
 if (memeList === null) {
   memeList = [];
 }
-//wries the memes to the page
-for (let i = 0; i < memeList.length; i++) {
-  const imgURL = memeList[i];
-  $(`<div id="savedImage${i}" class="img-fluid center col-12">
-  <img src="${memeList[i]}" class="img-fluid center col-12" alt="Responsive image" id="memeImage${i}"> <br> 
-  <div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text">Image URL</span>
+else{
+  addSavedMemes();
+}
+//writes the memes to the page
+function addSavedMemes(){
+  document.getElementById("imgSlot").innerHTML="";
+  for (let i = 0; i < memeList.length; i++) {
+    const imgURL = memeList[i];
+    $(`<div id="savedImage${i}" class="img-fluid center col-12">
+    <img src="${memeList[i].url}" class="storedImg img-fluid center col-12" alt="Responsive image" id="${i}"> <br> 
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Image URL</span>
+    </div>
+    <input type="text" class="form-control" value="${memeList[i].url}">
+    <div class="input-group-append">
+      <button class="deleteBtn btn btn-outline-secondary" type="button" value="${i}" id="button-addon2">Delete</button>
+    </div>
   </div>
-  <input type="text" class="form-control" value="${memeList[i]}">
-  <div class="input-group-append">
-    <button class="deleteBtn btn btn-outline-secondary" type="button" value="${i}" id="button-addon2">Delete</button>
   </div>
-</div>
-</div>
-`).prependTo("#imgSlot");
+  `).prependTo("#imgSlot");
+  }
+  //allow users to remove memes from their page
+  $(".deleteBtn").on("click", function(){
+    // console.log(memeList[this.value]);
+    document.getElementById("savedImage"+this.value).innerHTML=("");
+    //remove element at index i from meme array
+    memeList.splice(this.value,1);
+    //send updated meme array to local storage
+    localStorage.setItem("memeList", JSON.stringify(memeList));
+  })
+  $(".storedImg").on("dblclick", function(){
+    loadMeme=memeList[this.id];
+    $("#memeSelect")[0].value=loadMeme.template;
+    loadBlankMeme(loadMeme.template);
+    $("#fontSelect")[0].value=loadMeme.font;
+    //loops through newly created text boxes and loads in meme text
+    for (let i = 0; i < loadMeme.boxes.length; i++) {
+      const currentBox = loadMeme.boxes[i];
+      $("#textBox"+i)[0].value=currentBox.text;
+    }
+  });
 }
 //allow users to remove memes from their page
 $(".deleteBtn").on("click", function () {
@@ -32,6 +58,7 @@ $(".deleteBtn").on("click", function () {
   localStorage.setItem("memeList", JSON.stringify(memeList));
 })
 
+
 //declare these as global variables because we need them outside the first API call
 var memeObject = "";
 var template_id = "";
@@ -41,7 +68,7 @@ $.ajax({
   url: queryURL,
   method: "GET"
 }).then(function (response) {
-  console.log(response);
+  // console.log(response);
   //saves response into global object so it can be referenced outside this function
   memeObject = response;
   //add memes to dropdown menu
@@ -54,23 +81,26 @@ $.ajax({
   }
   //creates event listener for dropdown box
   document.getElementById("memeSelect").addEventListener("change", function () {
-    console.log(this.value);
-    template_id = response.data.memes[this.value].id;
-    $("#newMeme").attr("src", response.data.memes[this.value].url)
-    $("#newMeme").attr("alt", response.data.memes[this.value].name)
+    loadBlankMeme(this.value);
+  });
+
+});
+
+//this loads the correct number of text boxes and load the image
+function loadBlankMeme(memeID){
+    template_id = memeObject.data.memes[memeID].id;
+    $("#newMeme").attr("src", memeObject.data.memes[memeID].url)
+    $("#newMeme").attr("alt", memeObject.data.memes[memeID].name)
     //create dropdown boxes
     document.getElementById("textBoxes").innerHTML = "";
-    boxCount = response.data.memes[this.value].box_count;
-    console.log(boxCount);
+    boxCount = memeObject.data.memes[memeID].box_count;
     for (let i = 0; i < boxCount; i++) {
       $(`<div class="form-group" id="textBox">
             <label for="textBox${i}">Text Box #${i + 1}</label>
             <input type="text" class="form-control memeTextInput" id="textBox${i}">
             </div>`).appendTo("#textBoxes");
     }
-  });
-
-});
+}
 
 //this gets the final meme image from imgflip
 var dataObject = { username: "abtobey", password: "41River77$" };
@@ -86,14 +116,17 @@ function getMeme() {
   $.ajax({
     url: queryURL,
     method: "POST",
-    data: dataObject
-  }).then(function (response) {
-    console.log(response);
-    $("#newMeme").attr("src", response.data.url);
-    memeList.push(response.data.url);
-    localStorage.setItem("memeList", JSON.stringify(memeList));
-  })
-}
+    data:dataObject
+    }).then(function(response){
+        // console.log(response);
+        $("#newMeme").attr("src","");
+        $("#newMeme").attr("alt","");
+        memeList.push({"url":response.data.url, "boxes":textBoxArray, "font":dataObject.font, "template":$("#memeSelect")[0].value});
+        localStorage.setItem("memeList", JSON.stringify(memeList));
+        addSavedMemes();
+    })
+  }
+
 
 //google translate
 $("#submitButton").on("click", function (event) {
@@ -152,6 +185,7 @@ $("#submitButton").on("click", function (event) {
 
 })
 
+// Light/Dark Feature
 document.addEventListener('DOMContentLoaded', () => {
 
   const themeStylesheet = document.getElementById('theme');
@@ -166,6 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
       themeStylesheet.href = 'light-theme.css';
       themeToggle.innerText = 'Switch to dark mode';
 
-    }
+
+
+      }
   })
 })
+
+
