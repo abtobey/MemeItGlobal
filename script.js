@@ -23,11 +23,11 @@ for (let i = 0; i < memeList.length; i++) {
 `).prependTo("#imgSlot");
 }
 //allow users to remove memes from their page
-$(".deleteBtn").on("click", function(){
+$(".deleteBtn").on("click", function () {
   console.log(memeList[this.value]);
-  document.getElementById("savedImage"+this.value).innerHTML=("");
+  document.getElementById("savedImage" + this.value).innerHTML = ("");
   //remove element at index i from meme array
-  memeList.splice(this.value,1);
+  memeList.splice(this.value, 1);
   //send updated meme array to local storage
   localStorage.setItem("memeList", JSON.stringify(memeList));
 })
@@ -86,14 +86,14 @@ function getMeme() {
   $.ajax({
     url: queryURL,
     method: "POST",
-    data:dataObject
-    }).then(function(response){
-        console.log(response);
-        $("#newMeme").attr("src",response.data.url);
-        memeList.push(response.data.url);
-        localStorage.setItem("memeList", JSON.stringify(memeList));
-    })
-  }
+    data: dataObject
+  }).then(function (response) {
+    console.log(response);
+    $("#newMeme").attr("src", response.data.url);
+    memeList.push(response.data.url);
+    localStorage.setItem("memeList", JSON.stringify(memeList));
+  })
+}
 
 //google translate
 $("#submitButton").on("click", function (event) {
@@ -157,19 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeStylesheet = document.getElementById('theme');
   const themeToggle = document.getElementById('theme-toggle');
   themeToggle.addEventListener('click', () => {
-      // if it's light -> go dark
-      if(themeStylesheet.href.includes('light')){
-          themeStylesheet.href = 'dark-theme.css';
-          themeToggle.innerText = 'Switch to light mode';
-      } else {
-          // if it's dark -> go light
-          themeStylesheet.href = 'light-theme.css';
-          themeToggle.innerText = 'Switch to dark mode';
+    // if it's light -> go dark
+    if (themeStylesheet.href.includes('light')) {
+      themeStylesheet.href = 'dark-theme.css';
+      themeToggle.innerText = 'Switch to light mode';
+    } else {
+      // if it's dark -> go light
+      themeStylesheet.href = 'light-theme.css';
+      themeToggle.innerText = 'Switch to dark mode';
 
-      }
+    }
   })
 })
-// function changeFont() {
-//   let fontSelect = document.getElementById("input-font");   
-//   let font = fontSelect.options[fontSelect.selectedIndex].value;  
-//   document.getElementsByClassName("memeTextInput").style.fontFamily = font;   
