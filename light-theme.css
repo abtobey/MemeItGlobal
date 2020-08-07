@@ -5,6 +5,7 @@
 
 #jumbotron {
     background-color: mediumpurple;
+    border-radius: 5px;
 }
 
 
@@ -60,5 +61,10 @@ body {
     }
     #main-pg {
         margin: auto 20px;
+    }
+
+    #jumbotron {
+        background-color: mediumpurple;
+        border-radius: 0px;
     }
   }
