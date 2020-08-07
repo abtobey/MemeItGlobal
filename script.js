@@ -48,7 +48,15 @@ function addSavedMemes(){
     }
   });
 }
-
+//allow users to remove memes from their page
+$(".deleteBtn").on("click", function () {
+  console.log(memeList[this.value]);
+  document.getElementById("savedImage" + this.value).innerHTML = ("");
+  //remove element at index i from meme array
+  memeList.splice(this.value, 1);
+  //send updated meme array to local storage
+  localStorage.setItem("memeList", JSON.stringify(memeList));
+})
 
 
 //declare these as global variables because we need them outside the first API call
@@ -119,6 +127,7 @@ function getMeme() {
     })
   }
 
+
 //google translate
 $("#submitButton").on("click", function (event) {
   let languageAbbr = document.getElementById("languageSelect").value;
@@ -182,17 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeStylesheet = document.getElementById('theme');
   const themeToggle = document.getElementById('theme-toggle');
   themeToggle.addEventListener('click', () => {
-      // if it's light -> go dark
-      if(themeStylesheet.href.includes('light')){
-          themeStylesheet.href = 'dark-theme.css';
-          themeToggle.innerText = 'Switch to light mode';
-      } else {
-          // if it's dark -> go light
-          themeStylesheet.href = 'light-theme.css';
-          themeToggle.innerText = 'Switch to dark mode';
+    // if it's light -> go dark
+    if (themeStylesheet.href.includes('light')) {
+      themeStylesheet.href = 'dark-theme.css';
+      themeToggle.innerText = 'Switch to light mode';
+    } else {
+      // if it's dark -> go light
+      themeStylesheet.href = 'light-theme.css';
+      themeToggle.innerText = 'Switch to dark mode';
+
 
 
       }
   })
 })
+
 

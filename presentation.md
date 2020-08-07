@@ -1,13 +1,19 @@
 Presentation Layout
 
-Nicci: Introduction via README
+## Nicci
+Introduction
 
-Luis: Styling demonstration
+## Luis 
+Styling demonstration
 
-Aaron: Meme generator demonstration
+## Aaron
+Meme generator demonstration
 
-Nicci: Translator demonstration
+## Nicci
+Translator and font selector demonstration
 
-Aaron: Local storage, deletion, and editing demonstration
+## Aaron
+Local storage, deletion, and editing demonstration
 
-Luis: Light and dark mode demonstration
+## Luis
+Light and dark mode demonstration
