@@ -157,7 +157,7 @@ $("#submitButton").on("click", function (event) {
         "method": "POST",
         "headers": {
           "x-rapidapi-host": "google-translate1.p.rapidapi.com",
-          "x-rapidapi-key": "2ca2214731msh175d550fc24141bp15c630jsne72e70687c11",
+          "x-rapidapi-key": "0e771d6418mshc89aeed254d6904p1ee595jsn12c338a8d0b2",
           "accept-encoding": "application/gzip",
           "content-type": "application/x-www-form-urlencoded"
         },
